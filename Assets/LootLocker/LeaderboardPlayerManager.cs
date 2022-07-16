@@ -7,9 +7,17 @@ using TMPro;
 
 public class LeaderboardPlayerManager : MonoBehaviour
 {
+    public Leaderboard leaderboard;
+
     private void Start()
     {
-        StartCoroutine(LoginRoutine());
+        StartCoroutine(SetupRoutine());
+    }
+
+    private IEnumerator SetupRoutine()
+    {
+        yield return LoginRoutine();
+        yield return leaderboard.FetchTopHighScoresRoutine();
     }
 
     private IEnumerator LoginRoutine()
