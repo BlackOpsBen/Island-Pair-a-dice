@@ -40,4 +40,34 @@ public class DiceManager : MonoBehaviour
             die.rb.AddForce(Vector3.up * tossForceMultiplier, ForceMode.Impulse);
         }
     }
+
+    private void Update()
+    {
+        if (!isSuspended)
+        {
+            foreach (Dice die in dice)
+            {
+                if (!die.isStopped)
+                {
+                    return;
+                }
+            }
+
+            OnDoneRolling();
+        }
+    }
+
+    public void ResetDice()
+    {
+        isSuspended = true;
+    } 
+    
+    private void OnDoneRolling()
+    {
+        Debug.LogWarning("Done rolling!");
+        foreach (Dice die in dice)
+        {
+            Debug.LogWarning(die.name + " result: " + die.GetRolledSide());
+        }
+    }
 }
