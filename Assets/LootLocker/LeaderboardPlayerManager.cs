@@ -9,9 +9,26 @@ public class LeaderboardPlayerManager : MonoBehaviour
 {
     public Leaderboard leaderboard;
 
+    public TMP_InputField playerNameInputField;
+
     private void Start()
     {
         StartCoroutine(SetupRoutine());
+    }
+
+    public void SetPlayerName()
+    {
+        LootLockerSDKManager.SetPlayerName(playerNameInputField.text, (response) =>
+        {
+            if (response.success)
+            {
+                Debug.Log("Successfully set player name");
+            }
+            else
+            {
+                Debug.LogWarning("Could not set player name. " + response.Error);
+            }
+        });
     }
 
     private IEnumerator SetupRoutine()
