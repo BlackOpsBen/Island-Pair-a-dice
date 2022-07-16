@@ -50,5 +50,11 @@ public class TurnManager : MonoBehaviour
             DiceManager.Instance.ResetDice();
             StateManager.Instance.NewTurnStarted();
         }
+        else
+        {
+            StateManager.Instance.GameEnded();
+            Debug.LogWarning("Game Ended");
+            FindObjectOfType<Leaderboard>().SubmitScore(ScoreManager.Instance.GetTotalScore());
+        }
     }
 }

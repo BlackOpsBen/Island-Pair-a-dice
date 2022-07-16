@@ -61,4 +61,10 @@ public class StateManager : MonoBehaviour
     {
         rollBtn.SetActive(true);
     }
+
+    public void GameEnded()
+    {
+        keepGoingBtn.SetActive(false);
+        endTurnBtn.SetActive(false);
+    }
 }
