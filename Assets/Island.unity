@@ -356,9 +356,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1310540510}
-        m_TargetAssemblyTypeName: DiceManager, Assembly-CSharp
-        m_MethodName: ResetDice
+      - m_Target: {fileID: 1310540514}
+        m_TargetAssemblyTypeName: StateManager, Assembly-CSharp
+        m_MethodName: OnKeepGoing
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1369,9 +1369,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1310540510}
-        m_TargetAssemblyTypeName: DiceManager, Assembly-CSharp
-        m_MethodName: Roll
+      - m_Target: {fileID: 1310540514}
+        m_TargetAssemblyTypeName: StateManager, Assembly-CSharp
+        m_MethodName: OnRoll
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1494,8 +1494,9 @@ GameObject:
   - component: {fileID: 1310540510}
   - component: {fileID: 1310540512}
   - component: {fileID: 1310540513}
+  - component: {fileID: 1310540514}
   m_Layer: 0
-  m_Name: DiceManager
+  m_Name: GameManagers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1521,10 +1522,10 @@ MonoBehaviour:
   dice:
   - {fileID: 95289463}
   - {fileID: 849748544}
-  torqueMultiplier: 10
+  torqueMultiplier: 20
   tossForceMultiplier: 5
-  maxDiceDist: 4
-  adhesionForce: 8
+  maxDiceDist: 5
+  adhesionForce: 4
 --- !u!4 &1310540511
 Transform:
   m_ObjectHideFlags: 0
@@ -1567,7 +1568,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnsPerGame: 10
-  turnsText: {fileID: 0}
+  turnsText: {fileID: 2107707424}
+--- !u!114 &1310540514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310540509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca05d6948e7198f448503b070a493819, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rollBtn: {fileID: 1006314177}
+  keepGoingBtn: {fileID: 124046733}
+  endTurnBtn: {fileID: 1380769626}
 --- !u!1 &1380769626
 GameObject:
   m_ObjectHideFlags: 0
@@ -1651,9 +1667,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1310540513}
-        m_TargetAssemblyTypeName: TurnManager, Assembly-CSharp
-        m_MethodName: EndTurn
+      - m_Target: {fileID: 1310540514}
+        m_TargetAssemblyTypeName: StateManager, Assembly-CSharp
+        m_MethodName: OnEndTurn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

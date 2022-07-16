@@ -7,18 +7,6 @@ public class DiceManager : MonoBehaviour
 {
     public static DiceManager Instance { get; private set; }
 
-    private void Awake()
-    {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-        }
-    }
-
     public Vector3 averagePosition;
 
     [SerializeField] private Transform[] suspensionPoints;
@@ -41,6 +29,23 @@ public class DiceManager : MonoBehaviour
 
     private int resultScore = 0;
 
+    private Vector3[] randTorques = new Vector3[2];
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+
+        randTorques[0] = Vector3.zero;
+        randTorques[1] = Vector3.zero;
+    }
+
     private void FixedUpdate()
     {
         if (isSuspended)
@@ -51,9 +56,9 @@ public class DiceManager : MonoBehaviour
 
                 dice[i].rb.velocity = Vector3.zero;
 
-                Vector3 randTorque = new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), UnityEngine.Random.Range(-1.0f, 1.0f), UnityEngine.Random.Range(-1.0f, 1.0f));
+                //Vector3 randTorque = new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), UnityEngine.Random.Range(-1.0f, 1.0f), UnityEngine.Random.Range(-1.0f, 1.0f));
 
-                dice[i].rb.AddTorque(randTorque * torqueMultiplier, ForceMode.Force);
+                dice[i].rb.AddTorque(randTorques[i] * torqueMultiplier, ForceMode.Force);
             }
         }
         else
@@ -77,8 +82,6 @@ public class DiceManager : MonoBehaviour
 
     public void Roll()
     {
-        TurnManager.Instance.UseTurn();
-
         isSuspended = false;
 
         foreach (Dice die in dice)
@@ -89,6 +92,9 @@ public class DiceManager : MonoBehaviour
 
     private void Update()
     {
+        randTorques[0] = Vector3.Slerp(randTorques[0], new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), UnityEngine.Random.Range(-1.0f, 1.0f), UnityEngine.Random.Range(-1.0f, 1.0f)), Time.deltaTime);
+        randTorques[1] = Vector3.Slerp(randTorques[1], new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), UnityEngine.Random.Range(-1.0f, 1.0f), UnityEngine.Random.Range(-1.0f, 1.0f)), Time.deltaTime);
+
         averagePosition = Vector3.Lerp(dice[0].transform.position, dice[1].transform.position, 0.5f);
 
         if (!isSuspended)
@@ -117,11 +123,8 @@ public class DiceManager : MonoBehaviour
     
     private void OnDoneRolling()
     {
-        /*Debug.LogWarning("Done rolling!");
-        foreach (Dice die in dice)
-        {
-            Debug.LogWarning(die.name + " result: " + die.GetRolledSide());
-        }*/
+        Debug.Log("Done Rolling");
+
         resultScore = 0;
 
         int numSkunks = 0;
@@ -143,14 +146,17 @@ public class DiceManager : MonoBehaviour
         {
             resultScore = 0;
             ScoreManager.Instance.ResetTurnScore();
+            StateManager.Instance.MustEnd();
         }
         else if (numSkunks == 2)
         {
             ScoreManager.Instance.ResetTotalScore();
+            StateManager.Instance.MustEnd();
         }
         else
         {
             ScoreManager.Instance.AddTurnPoints(resultScore);
+            StateManager.Instance.CanContinue();
         }
     }
 

@@ -26,12 +26,7 @@ public class TurnManager : MonoBehaviour
 
         turnsRemaining = turnsPerGame;
 
-        UpdateTurnsText();
-    }
-
-    public int GetTurnsRemaining()
-    {
-        return turnsRemaining;
+        UseTurn();
     }
 
     public void UseTurn()
@@ -47,11 +42,13 @@ public class TurnManager : MonoBehaviour
 
     public void EndTurn()
     {
+        ScoreManager.Instance.BankPoints();
+
         if (turnsRemaining > 0)
         {
             UseTurn();
-            ScoreManager.Instance.BankPoints();
             DiceManager.Instance.ResetDice();
+            StateManager.Instance.NewTurnStarted();
         }
     }
 }
