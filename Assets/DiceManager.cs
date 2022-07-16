@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,8 @@ public class DiceManager : MonoBehaviour
         }
     }
 
+    public Vector3 averagePosition;
+
     [SerializeField] private Transform[] suspensionPoints;
 
     [SerializeField] private Dice[] dice;
@@ -25,6 +28,10 @@ public class DiceManager : MonoBehaviour
     [SerializeField] private float torqueMultiplier = 10.0f;
 
     [SerializeField] private float tossForceMultiplier = 5.0f;
+
+    [SerializeField] private float maxDiceDist = 10.0f;
+
+    [SerializeField] private float adhesionForce = 8.0f;
 
     private bool isSuspended = true;
 
@@ -43,6 +50,23 @@ public class DiceManager : MonoBehaviour
                 dice[i].rb.AddTorque(randTorque * torqueMultiplier, ForceMode.Force);
             }
         }
+        else
+        {
+            float distBetween = GetDistBetweenDice();
+            Debug.Log("Distance between dice: " + distBetween);
+            if (distBetween > maxDiceDist)
+            {
+                for (int i = 0; i < dice.Length; i++)
+                {
+                    dice[i].rb.AddExplosionForce(-adhesionForce, averagePosition, float.MaxValue, 0.0f, ForceMode.Force);
+                }
+            }
+        }
+    }
+
+    private float GetDistBetweenDice()
+    {
+        return Vector3.Distance(dice[0].transform.position, dice[1].transform.position);
     }
 
     public void Roll()
@@ -57,6 +81,8 @@ public class DiceManager : MonoBehaviour
 
     private void Update()
     {
+        averagePosition = Vector3.Lerp(dice[0].transform.position, dice[1].transform.position, 0.5f);
+
         if (!isSuspended)
         {
             foreach (Dice die in dice)

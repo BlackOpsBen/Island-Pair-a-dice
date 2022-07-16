@@ -10,7 +10,7 @@ public class CamLookAtDice : MonoBehaviour
 
     private void Update()
     {
-        Vector3 averagePosition = Vector3.Lerp(targets[0].position, targets[1].position, 0.5f);
+        Vector3 averagePosition = DiceManager.Instance.averagePosition;
 
         Vector3 lookDireciton = averagePosition - transform.position;
 
