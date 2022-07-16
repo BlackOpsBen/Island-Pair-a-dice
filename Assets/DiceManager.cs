@@ -37,6 +37,10 @@ public class DiceManager : MonoBehaviour
 
     private bool isSuspended = true;
 
+    private bool isDoneRolling = false;
+
+    private int resultScore = 0;
+
     private void FixedUpdate()
     {
         if (isSuspended)
@@ -73,6 +77,8 @@ public class DiceManager : MonoBehaviour
 
     public void Roll()
     {
+        TurnManager.Instance.UseTurn();
+
         isSuspended = false;
 
         foreach (Dice die in dice)
@@ -95,26 +101,66 @@ public class DiceManager : MonoBehaviour
                 }
             }
 
-            OnDoneRolling();
+            if (!isDoneRolling)
+            {
+                isDoneRolling = true;
+                OnDoneRolling();
+            }
         }
     }
 
     public void ResetDice()
     {
         isSuspended = true;
+        isDoneRolling = false;
     } 
     
     private void OnDoneRolling()
     {
-        Debug.LogWarning("Done rolling!");
+        /*Debug.LogWarning("Done rolling!");
         foreach (Dice die in dice)
         {
             Debug.LogWarning(die.name + " result: " + die.GetRolledSide());
+        }*/
+        resultScore = 0;
+
+        int numSkunks = 0;
+
+        for (int i = 0; i < dice.Length; i++)
+        {
+            int rolledSide = dice[i].GetRolledSide();
+            if (rolledSide == 6)
+            {
+                numSkunks++;
+            }
+            else
+            {
+                resultScore += rolledSide;
+            }
+        }
+
+        if (numSkunks == 1)
+        {
+            resultScore = 0;
+            ScoreManager.Instance.ResetTurnScore();
+        }
+        else if (numSkunks == 2)
+        {
+            ScoreManager.Instance.ResetTotalScore();
+        }
+        else
+        {
+            ScoreManager.Instance.AddTurnPoints(resultScore);
         }
     }
 
     public bool GetIsSuspended()
     {
         return isSuspended;
+    }
+
+    public int GetResultScore()
+    {
+        return resultScore;
     }
 }
