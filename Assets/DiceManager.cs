@@ -4,15 +4,40 @@ using UnityEngine;
 
 public class DiceManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Transform[] suspensionPoints;
+
+    [SerializeField] private Dice[] dice;
+
+    [SerializeField] private float torqueMultiplier = 10.0f;
+
+    [SerializeField] private float tossForceMultiplier = 5.0f;
+
+    private bool isSuspended = true;
+
+    private void FixedUpdate()
     {
-        
+        if (isSuspended)
+        {
+            for (int i = 0; i < dice.Length; i++)
+            {
+                dice[i].rb.position = suspensionPoints[i].position;
+
+                dice[i].rb.velocity = Vector3.zero;
+
+                Vector3 randTorque = new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), UnityEngine.Random.Range(-1.0f, 1.0f), UnityEngine.Random.Range(-1.0f, 1.0f));
+
+                dice[i].rb.AddTorque(randTorque * torqueMultiplier, ForceMode.Force);
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Roll()
     {
-        
+        isSuspended = false;
+
+        foreach (Dice die in dice)
+        {
+            die.rb.AddForce(Vector3.up * tossForceMultiplier, ForceMode.Impulse);
+        }
     }
 }
