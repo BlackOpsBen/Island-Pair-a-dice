@@ -1145,6 +1145,7 @@ MonoBehaviour:
   suspensionPoints:
   - {fileID: 620555626}
   - {fileID: 810760995}
+  suspendLerpSpeed: 4
   dice:
   - {fileID: 95289463}
   - {fileID: 849748544}

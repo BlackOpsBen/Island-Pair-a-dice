@@ -23,6 +23,8 @@ public class DiceManager : MonoBehaviour
 
     [SerializeField] private Transform[] suspensionPoints;
 
+    [SerializeField] private float suspendLerpSpeed = 2.0f;
+
     [SerializeField] private Dice[] dice;
 
     [SerializeField] private float torqueMultiplier = 10.0f;
@@ -41,7 +43,7 @@ public class DiceManager : MonoBehaviour
         {
             for (int i = 0; i < dice.Length; i++)
             {
-                dice[i].rb.position = suspensionPoints[i].position;
+                dice[i].rb.position = Vector3.Lerp(dice[i].rb.position, suspensionPoints[i].position, Time.fixedDeltaTime * suspendLerpSpeed);
 
                 dice[i].rb.velocity = Vector3.zero;
 
@@ -53,7 +55,7 @@ public class DiceManager : MonoBehaviour
         else
         {
             float distBetween = GetDistBetweenDice();
-            Debug.Log("Distance between dice: " + distBetween);
+            //Debug.Log("Distance between dice: " + distBetween);
             if (distBetween > maxDiceDist)
             {
                 for (int i = 0; i < dice.Length; i++)
