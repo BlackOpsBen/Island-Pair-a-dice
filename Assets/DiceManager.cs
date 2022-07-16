@@ -4,6 +4,20 @@ using UnityEngine;
 
 public class DiceManager : MonoBehaviour
 {
+    public static DiceManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
     [SerializeField] private Transform[] suspensionPoints;
 
     [SerializeField] private Dice[] dice;
@@ -69,5 +83,10 @@ public class DiceManager : MonoBehaviour
         {
             Debug.LogWarning(die.name + " result: " + die.GetRolledSide());
         }
+    }
+
+    public bool GetIsSuspended()
+    {
+        return isSuspended;
     }
 }
