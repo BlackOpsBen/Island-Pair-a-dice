@@ -19,9 +19,11 @@ public class StateManager : MonoBehaviour
 
         keepGoingBtn.SetActive(false);
         endTurnBtn.SetActive(false);
+        turnScore.SetActive(false);
+        turnScoreLabel.SetActive(false);
     }
 
-    [SerializeField] private GameObject rollBtn, keepGoingBtn, endTurnBtn;
+    [SerializeField] private GameObject rollBtn, keepGoingBtn, endTurnBtn, turnScore, turnScoreLabel, bankedLabel, bankedScore, rollsLabel, rollsCounter;
 
     public void OnRoll()
     {
@@ -42,6 +44,8 @@ public class StateManager : MonoBehaviour
         TurnManager.Instance.EndTurn();
         keepGoingBtn.SetActive(false);
         endTurnBtn.SetActive(false);
+        turnScore.SetActive(false);
+        turnScoreLabel.SetActive(false);
     }
 
 
@@ -49,22 +53,32 @@ public class StateManager : MonoBehaviour
     {
         keepGoingBtn.SetActive(false);
         endTurnBtn.SetActive(true);
+        turnScore.SetActive(false);
+        turnScoreLabel.SetActive(false);
     }
 
     public void CanContinue()
     {
         keepGoingBtn.SetActive(true);
         endTurnBtn.SetActive(true);
+        turnScore.SetActive(true);
+        turnScoreLabel.SetActive(true);
     }
 
     public void NewTurnStarted()
     {
         rollBtn.SetActive(true);
+        turnScore.SetActive(false);
+        turnScoreLabel.SetActive(false);
     }
 
     public void GameEnded()
     {
         keepGoingBtn.SetActive(false);
         endTurnBtn.SetActive(false);
+        turnScore.SetActive(false);
+        turnScoreLabel.SetActive(false);
+        rollsLabel.SetActive(false);
+        rollsCounter.SetActive(false);
     }
 }

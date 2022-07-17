@@ -60,7 +60,7 @@ public class ScoreManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        totalScoreText.text = "Total Score: " + totalScore;
-        turnScoreText.text = "Turn Score: " + turnScore;
+        totalScoreText.text = totalScore.ToString();
+        turnScoreText.text = turnScore.ToString();
     }
 }

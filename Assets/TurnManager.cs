@@ -37,7 +37,7 @@ public class TurnManager : MonoBehaviour
 
     private void UpdateTurnsText()
     {
-        turnsText.text = turnsRemaining + " Turns remaining";
+        turnsText.text = turnsRemaining.ToString();
     }
 
     public void EndTurn()
