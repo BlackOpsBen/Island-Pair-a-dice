@@ -82,6 +82,9 @@ public class DiceManager : MonoBehaviour
 
     public void Roll()
     {
+        AudioManager.Instance.PlaySound("gravels", "WorldSFX");
+        AudioManager.Instance.PlaySound("whoosh", "Misc");
+
         isSuspended = false;
 
         foreach (Dice die in dice)
@@ -147,11 +150,13 @@ public class DiceManager : MonoBehaviour
             resultScore = 0;
             ScoreManager.Instance.ResetTurnScore();
             StateManager.Instance.MustEnd();
+            AudioManager.Instance.PlaySound("skunk1", "Misc");
         }
         else if (numSkunks == 2)
         {
             ScoreManager.Instance.ResetTotalScore();
             StateManager.Instance.MustEnd();
+            AudioManager.Instance.PlaySound("skunk2", "Misc");
         }
         else
         {

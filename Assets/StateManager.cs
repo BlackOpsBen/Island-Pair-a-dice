@@ -37,6 +37,7 @@ public class StateManager : MonoBehaviour
         rollBtn.SetActive(true);
         keepGoingBtn.SetActive(false);
         endTurnBtn.SetActive(false);
+        AudioManager.Instance.PlaySound("mallet_2", "UI");
     }
 
     public void OnEndTurn()
@@ -46,6 +47,7 @@ public class StateManager : MonoBehaviour
         endTurnBtn.SetActive(false);
         turnScore.SetActive(false);
         turnScoreLabel.SetActive(false);
+        AudioManager.Instance.PlaySound("mallet_3", "UI");
     }
 
 
@@ -87,6 +89,7 @@ public class StateManager : MonoBehaviour
     {
         gameOverUI.SetActive(false);
         leaderBoardUI.SetActive(true);
+        AudioManager.Instance.PlaySound("mallet_light_1", "UI");
 
         FindObjectOfType<Leaderboard>().SubmitScore(ScoreManager.Instance.GetTotalScore());
     }
