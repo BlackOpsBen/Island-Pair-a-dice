@@ -25,6 +25,8 @@ public class StateManager : MonoBehaviour
 
     [SerializeField] private GameObject rollBtn, keepGoingBtn, endTurnBtn, turnScore, turnScoreLabel, scoreUI, leaderBoardUI, gameOverUI;
 
+    private int ascendingSteps = 0;
+
     public void OnRoll()
     {
         DiceManager.Instance.Roll();
@@ -65,6 +67,12 @@ public class StateManager : MonoBehaviour
         endTurnBtn.SetActive(true);
         turnScore.SetActive(true);
         turnScoreLabel.SetActive(true);
+        ascendingSteps++;
+        if (ascendingSteps > 10)
+        {
+            ascendingSteps = 10;
+        }
+        AudioManager.Instance.PlaySound("GainSC " + ascendingSteps, "Misc");
     }
 
     public void NewTurnStarted()
@@ -72,6 +80,7 @@ public class StateManager : MonoBehaviour
         rollBtn.SetActive(true);
         turnScore.SetActive(false);
         turnScoreLabel.SetActive(false);
+        ascendingSteps = 0;
     }
 
     public void GameEnded()
@@ -103,5 +112,6 @@ public class StateManager : MonoBehaviour
         ScoreManager.Instance.ResetTotalScore();
         ScoreManager.Instance.ResetTurnScore();
         DiceManager.Instance.ResetDice();
+        AudioManager.Instance.PlaySound("mallet_light_1", "UI");
     }
 }

@@ -33,6 +33,10 @@ public class ScoreManager : MonoBehaviour
     public void BankPoints()
     {
         totalScore += turnScore;
+        if (turnScore > 0)
+        {
+            AudioManager.Instance.PlaySound("bank", "Misc");
+        }
         ResetTurnScore();
     }
 

@@ -218,7 +218,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1750454062}
+  - {fileID: 1640034223}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -918,6 +918,7 @@ MonoBehaviour:
   tossForceMultiplier: 5
   maxDiceDist: 5
   adhesionForce: 4
+  skunkShakePreset: {fileID: 11400000, guid: 328e2651c784c2a4899dcdbebe413ab8, type: 2}
 --- !u!4 &1310540511
 Transform:
   m_ObjectHideFlags: 0
@@ -1133,6 +1134,70 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1640034222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1640034223}
+  - component: {fileID: 1640034225}
+  - component: {fileID: 1640034224}
+  m_Layer: 0
+  m_Name: CamSlot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1640034223
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640034222}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 8.73, z: -10.44}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1750454062}
+  m_Father: {fileID: 311919822}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1640034224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640034222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67d3f6286300d1a4aa18681b7b05817c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inZ: -5
+  outZ: -13
+  transitionSpeed: 1
+--- !u!114 &1640034225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640034222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9eae6f25c95f3448b4fbee5fb4a5212, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targets:
+  - {fileID: 95289462}
+  - {fileID: 849748547}
+  slerpSpeed: 2
 --- !u!1 &1656332176 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 396575800138544849, guid: 9e37b1cfbfa9e784189ccc5d8f937d3a, type: 3}
@@ -1151,7 +1216,6 @@ GameObject:
   - component: {fileID: 1750454060}
   - component: {fileID: 1750454063}
   - component: {fileID: 1750454064}
-  - component: {fileID: 1750454065}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1217,11 +1281,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1750454059}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 8.73, z: -10.44}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 311919822}
+  m_Father: {fileID: 1640034223}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1750454063
@@ -1266,28 +1330,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1750454059}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9eae6f25c95f3448b4fbee5fb4a5212, type: 3}
+  m_Script: {fileID: 11500000, guid: 1697a0132719bae458729c9e99c0c716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets:
-  - {fileID: 95289462}
-  - {fileID: 849748547}
-  slerpSpeed: 2
---- !u!114 &1750454065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1750454059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67d3f6286300d1a4aa18681b7b05817c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inZ: -5
-  outZ: -13
-  transitionSpeed: 1
+  addToGlobalShakers: 1
 --- !u!1 &1772133086 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3719048676445532084, guid: 401c1ad1d74618245b80bd65fb5c7353, type: 3}

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MilkShake;
 
 public class DiceManager : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class DiceManager : MonoBehaviour
     private int resultScore = 0;
 
     private Vector3[] randTorques = new Vector3[2];
+
+    [SerializeField] private ShakePreset skunkShakePreset;
 
     private void Awake()
     {
@@ -151,12 +154,16 @@ public class DiceManager : MonoBehaviour
             ScoreManager.Instance.ResetTurnScore();
             StateManager.Instance.MustEnd();
             AudioManager.Instance.PlaySound("skunk1", "Misc");
+            Shaker.ShakeAll(skunkShakePreset);
+            
         }
         else if (numSkunks == 2)
         {
             ScoreManager.Instance.ResetTotalScore();
+            ScoreManager.Instance.ResetTurnScore();
             StateManager.Instance.MustEnd();
-            AudioManager.Instance.PlaySound("skunk2", "Misc");
+            AudioManager.Instance.PlaySound("skunk1", "Misc");
+            Shaker.ShakeAll(skunkShakePreset);
         }
         else
         {
