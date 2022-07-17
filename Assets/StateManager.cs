@@ -55,6 +55,7 @@ public class StateManager : MonoBehaviour
         turnScore.SetActive(false);
         turnScoreLabel.SetActive(false);
         AudioManager.Instance.PlaySound("mallet_3", "UI");
+        bustedAnimator.ResetTrigger("Show");
         bustedAnimator.SetTrigger("Hide");
     }
 
@@ -65,6 +66,7 @@ public class StateManager : MonoBehaviour
         endTurnBtn.SetActive(true);
         turnScore.SetActive(false);
         turnScoreLabel.SetActive(false);
+        bustedAnimator.ResetTrigger("Hide");
         bustedAnimator.SetTrigger("Show");
     }
 
