@@ -34,6 +34,11 @@ public class DiceManager : MonoBehaviour
 
     [SerializeField] private ShakePreset skunkShakePreset;
 
+    private float diceTimerLimit = 6.0f;
+    private float diceTimer = 0.0f;
+
+    [SerializeField] private GameObject stuckDiceUI;
+
     private void Awake()
     {
         if (Instance != null)
@@ -94,11 +99,19 @@ public class DiceManager : MonoBehaviour
         AudioManager.Instance.PlaySound("whoosh", "Misc");
 
         isSuspended = false;
+        NudgeDice();
 
+        diceTimer = 0.0f;
+    }
+
+    public void NudgeDice()
+    {
         foreach (Dice die in dice)
         {
             die.rb.AddForce(Vector3.up * tossForceMultiplier, ForceMode.Impulse);
         }
+
+        diceTimer = 0.0f;
     }
 
     private void Update()
@@ -110,6 +123,14 @@ public class DiceManager : MonoBehaviour
 
         if (!isSuspended)
         {
+            if (!isDoneRolling)
+            {
+                diceTimer += Time.deltaTime;
+            }
+
+            Debug.Log(diceTimer);
+            stuckDiceUI.SetActive(diceTimer > diceTimerLimit);
+
             foreach (Dice die in dice)
             {
                 if (!die.isStopped)
@@ -183,6 +204,8 @@ public class DiceManager : MonoBehaviour
             ScoreManager.Instance.AddTurnPoints(resultScore);
             StateManager.Instance.CanContinue();
         }
+
+        diceTimer = 0.0f;
     }
 
     public bool GetIsSuspended()
