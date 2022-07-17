@@ -25,6 +25,8 @@ public class StateManager : MonoBehaviour
 
     [SerializeField] private GameObject rollBtn, keepGoingBtn, endTurnBtn, turnScore, turnScoreLabel, scoreUI, leaderBoardUI, gameOverUI;
 
+    [SerializeField] private Animator bustedAnimator;
+
     private int ascendingSteps = 0;
 
     private bool isFirstRollOfTurn = true;
@@ -53,6 +55,7 @@ public class StateManager : MonoBehaviour
         turnScore.SetActive(false);
         turnScoreLabel.SetActive(false);
         AudioManager.Instance.PlaySound("mallet_3", "UI");
+        bustedAnimator.SetTrigger("Hide");
     }
 
 
@@ -62,6 +65,7 @@ public class StateManager : MonoBehaviour
         endTurnBtn.SetActive(true);
         turnScore.SetActive(false);
         turnScoreLabel.SetActive(false);
+        bustedAnimator.SetTrigger("Show");
     }
 
     public void CanContinue()

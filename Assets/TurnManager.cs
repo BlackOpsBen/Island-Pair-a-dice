@@ -58,6 +58,6 @@ public class TurnManager : MonoBehaviour
     public void NewGame()
     {
         turnsRemaining = turnsPerGame;
-        UseTurn();
+        UpdateTurnsText();
     }
 }
