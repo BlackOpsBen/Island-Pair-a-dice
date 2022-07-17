@@ -119,7 +119,7 @@ public class StateManager : MonoBehaviour
         scoreUI.SetActive(true);
         NewTurnStarted();
         TurnManager.Instance.NewGame();
-        ScoreManager.Instance.ResetTotalScore();
+        ScoreManager.Instance.ResetTotalScore(false);
         ScoreManager.Instance.ResetTurnScore();
         DiceManager.Instance.ResetDice();
         AudioManager.Instance.PlaySound("mallet_light_1", "UI");

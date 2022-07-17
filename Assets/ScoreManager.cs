@@ -9,6 +9,8 @@ public class ScoreManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI totalScoreText, turnScoreText, finalScoreText;
 
+    [SerializeField] private Animator animator;
+
     private void Awake()
     {
         if (Instance != null)
@@ -36,6 +38,7 @@ public class ScoreManager : MonoBehaviour
         if (turnScore > 0)
         {
             AudioManager.Instance.PlaySound("bank", "Misc");
+            animator.SetTrigger("Gain");
         }
         ResetTurnScore();
     }
@@ -56,10 +59,14 @@ public class ScoreManager : MonoBehaviour
         return totalScore;
     }
 
-    public void ResetTotalScore()
+    public void ResetTotalScore(bool isSkunk)
     {
         totalScore = 0;
         UpdateUI();
+        if (isSkunk)
+        {
+            animator.SetTrigger("Reset");
+        }
     }
 
     private void UpdateUI()

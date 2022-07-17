@@ -130,6 +130,14 @@ public class DiceManager : MonoBehaviour
     {
         isSuspended = true;
         isDoneRolling = false;
+        foreach (Dice die in dice)
+        {
+            float randX = UnityEngine.Random.Range(0.5f, 1.0f);
+            float randY = UnityEngine.Random.Range(-1.0f, 1.0f);
+            float randZ = UnityEngine.Random.Range(0.5f, 1.0f);
+            Vector3 randTorque = new Vector3(randX, randY, randZ);
+            die.rb.AddTorque(randTorque * 1000.0f, ForceMode.Impulse);
+        }
     } 
     
     private void OnDoneRolling()
@@ -164,7 +172,7 @@ public class DiceManager : MonoBehaviour
         }
         else if (numSkunks == 2)
         {
-            ScoreManager.Instance.ResetTotalScore();
+            ScoreManager.Instance.ResetTotalScore(true);
             ScoreManager.Instance.ResetTurnScore();
             StateManager.Instance.MustEnd();
             AudioManager.Instance.PlaySound("skunk1", "Misc");
