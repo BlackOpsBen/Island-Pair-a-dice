@@ -23,7 +23,7 @@ public class StateManager : MonoBehaviour
         turnScoreLabel.SetActive(false);
     }
 
-    [SerializeField] private GameObject rollBtn, keepGoingBtn, endTurnBtn, turnScore, turnScoreLabel, bankedLabel, bankedScore, rollsLabel, rollsCounter, leaderBoardUI, gameOverUI;
+    [SerializeField] private GameObject rollBtn, keepGoingBtn, endTurnBtn, turnScore, turnScoreLabel, scoreUI, leaderBoardUI, gameOverUI;
 
     public void OnRoll()
     {
@@ -78,10 +78,7 @@ public class StateManager : MonoBehaviour
         endTurnBtn.SetActive(false);
         turnScore.SetActive(false);
         turnScoreLabel.SetActive(false);
-        rollsLabel.SetActive(false);
-        rollsCounter.SetActive(false);
-        bankedLabel.SetActive(false);
-        bankedScore.SetActive(false);
+        scoreUI.SetActive(false);
 
         gameOverUI.SetActive(true);
     }
@@ -92,5 +89,16 @@ public class StateManager : MonoBehaviour
         leaderBoardUI.SetActive(true);
 
         FindObjectOfType<Leaderboard>().SubmitScore(ScoreManager.Instance.GetTotalScore());
+    }
+
+    public void OnNewGame()
+    {
+        leaderBoardUI.SetActive(false);
+        scoreUI.SetActive(true);
+        NewTurnStarted();
+        TurnManager.Instance.NewGame();
+        ScoreManager.Instance.ResetTotalScore();
+        ScoreManager.Instance.ResetTurnScore();
+        DiceManager.Instance.ResetDice();
     }
 }

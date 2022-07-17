@@ -7,7 +7,7 @@ public class TurnManager : MonoBehaviour
 {
     public static TurnManager Instance { get; private set; }
 
-    [SerializeField] private int turnsPerGame = 10;
+    [SerializeField] private int turnsPerGame = 5;
 
     [SerializeField] private TextMeshProUGUI turnsText;
 
@@ -55,5 +55,11 @@ public class TurnManager : MonoBehaviour
             StateManager.Instance.GameEnded();
             Debug.LogWarning("Game Ended");
         }
+    }
+
+    public void NewGame()
+    {
+        turnsRemaining = turnsPerGame;
+        UseTurn();
     }
 }

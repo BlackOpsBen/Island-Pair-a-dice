@@ -13,11 +13,18 @@ public class LeaderboardPlayerManager : MonoBehaviour
 
     private void Start()
     {
+        if (PlayerPrefs.HasKey("PlayerName"))
+        {
+            playerNameInputField.text = PlayerPrefs.GetString("PlayerName");
+        }
+
         StartCoroutine(SetupRoutine());
     }
 
     public void SetPlayerName()
     {
+        PlayerPrefs.SetString("PlayerName", playerNameInputField.text);
+
         LootLockerSDKManager.SetPlayerName(playerNameInputField.text, (response) =>
         {
             if (response.success)
