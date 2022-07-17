@@ -12,7 +12,13 @@ public class Leaderboard : MonoBehaviour
 
     public void SubmitScore(int score)
     {
-        StartCoroutine(SubmitScoreRoutine(score));
+        StartCoroutine(RefreshScoresRoutine(score));
+    }
+
+    public IEnumerator RefreshScoresRoutine(int score)
+    {
+        yield return SubmitScoreRoutine(score);
+        yield return FetchTopHighScoresRoutine();
     }
 
     private IEnumerator SubmitScoreRoutine(int scoreToUpload)

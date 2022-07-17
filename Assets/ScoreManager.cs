@@ -7,7 +7,7 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
 
-    [SerializeField] private TextMeshProUGUI totalScoreText, turnScoreText;
+    [SerializeField] private TextMeshProUGUI totalScoreText, turnScoreText, finalScoreText;
 
     private void Awake()
     {
@@ -62,5 +62,6 @@ public class ScoreManager : MonoBehaviour
     {
         totalScoreText.text = totalScore.ToString();
         turnScoreText.text = turnScore.ToString();
+        finalScoreText.text = totalScore.ToString();
     }
 }

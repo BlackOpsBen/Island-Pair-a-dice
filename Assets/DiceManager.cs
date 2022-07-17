@@ -61,7 +61,7 @@ public class DiceManager : MonoBehaviour
                 dice[i].rb.AddTorque(randTorques[i] * torqueMultiplier, ForceMode.Force);
             }
         }
-        else
+        /*else
         {
             float distBetween = GetDistBetweenDice();
             //Debug.Log("Distance between dice: " + distBetween);
@@ -72,7 +72,7 @@ public class DiceManager : MonoBehaviour
                     dice[i].rb.AddExplosionForce(-adhesionForce, averagePosition, float.MaxValue, 0.0f, ForceMode.Force);
                 }
             }
-        }
+        }*/
     }
 
     private float GetDistBetweenDice()

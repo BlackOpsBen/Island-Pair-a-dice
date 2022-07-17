@@ -12,7 +12,7 @@ public class Dice : MonoBehaviour
 
     private void Update()
     {
-        isStopped = rb.velocity.sqrMagnitude < float.Epsilon * 2;
+        isStopped = rb.velocity.sqrMagnitude < float.Epsilon;
     }
 
     public int GetRolledSide()

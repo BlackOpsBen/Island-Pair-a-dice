@@ -54,7 +54,6 @@ public class TurnManager : MonoBehaviour
         {
             StateManager.Instance.GameEnded();
             Debug.LogWarning("Game Ended");
-            FindObjectOfType<Leaderboard>().SubmitScore(ScoreManager.Instance.GetTotalScore());
         }
     }
 }
