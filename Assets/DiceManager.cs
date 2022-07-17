@@ -85,6 +85,11 @@ public class DiceManager : MonoBehaviour
 
     public void Roll()
     {
+        if (StateManager.Instance.GetIsFirstRollOfTurn())
+        {
+            TurnManager.Instance.UseTurn();
+        }
+
         AudioManager.Instance.PlaySound("gravels", "WorldSFX");
         AudioManager.Instance.PlaySound("whoosh", "Misc");
 

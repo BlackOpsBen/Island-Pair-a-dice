@@ -27,10 +27,13 @@ public class StateManager : MonoBehaviour
 
     private int ascendingSteps = 0;
 
+    private bool isFirstRollOfTurn = true;
+
     public void OnRoll()
     {
         DiceManager.Instance.Roll();
         rollBtn.SetActive(false);
+        isFirstRollOfTurn = false;
     }
 
     public void OnKeepGoing()
@@ -81,6 +84,7 @@ public class StateManager : MonoBehaviour
         turnScore.SetActive(false);
         turnScoreLabel.SetActive(false);
         ascendingSteps = 0;
+        isFirstRollOfTurn = true;
     }
 
     public void GameEnded()
@@ -113,5 +117,10 @@ public class StateManager : MonoBehaviour
         ScoreManager.Instance.ResetTurnScore();
         DiceManager.Instance.ResetDice();
         AudioManager.Instance.PlaySound("mallet_light_1", "UI");
+    }
+
+    public bool GetIsFirstRollOfTurn()
+    {
+        return isFirstRollOfTurn;
     }
 }

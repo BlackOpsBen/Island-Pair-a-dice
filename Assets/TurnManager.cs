@@ -25,8 +25,7 @@ public class TurnManager : MonoBehaviour
         }
 
         turnsRemaining = turnsPerGame;
-
-        UseTurn();
+        UpdateTurnsText();
     }
 
     public void UseTurn()
@@ -46,7 +45,6 @@ public class TurnManager : MonoBehaviour
 
         if (turnsRemaining > 0)
         {
-            UseTurn();
             DiceManager.Instance.ResetDice();
             StateManager.Instance.NewTurnStarted();
         }
